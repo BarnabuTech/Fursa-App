@@ -12,8 +12,7 @@ export default function HomeLayout() {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="details" />
+  
     </Stack>
   );
 }
