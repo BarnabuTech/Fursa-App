@@ -1,9 +1,12 @@
+import { Link } from 'expo-router';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>WELCOME TO FURSA</Text>
+      <Text>Home</Text>
+      <Link href="/details">View details</Link>
+      <Link href="/settings">settings</Link>
     </View>
   );
 }

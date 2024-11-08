@@ -1,8 +1,6 @@
 import { Stack } from 'expo-router';
-import { Tabs } from 'expo-router';
-import { FontAwesome } from '@expo/vector-icons';
 
-export default function RootLayout() {
+export default function HomeLayout() {
   return (
     <Stack
       screenOptions={{
@@ -13,15 +11,9 @@ export default function RootLayout() {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-      }}
-    >
-      {/* Define a Stack.Screen for the Tabs layout */}
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
-      {/* Other stack screens */}
+      }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="details" />
-      <Stack.Screen name="(home)" />
     </Stack>
   );
 }
