@@ -8,7 +8,6 @@ const Login: React.FC = () => {
   const router = useRouter();
 
   const validateEmail = (email: string) => {
-    // Simple email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -24,9 +23,8 @@ const Login: React.FC = () => {
       return;
     }
 
-    // Proceed with login if validation passes
     console.log("Logging in with:", email, password);
-    router.replace("/(tabs)"); // Navigate to the main tabs if login is successful
+    router.replace("/(tabs)"); 
   };
 
   return (

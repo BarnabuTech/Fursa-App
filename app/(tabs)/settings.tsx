@@ -7,7 +7,6 @@ const Settings: React.FC = () => {
   const router = useRouter();
 
   const handleLogout = () => {
-    // Show confirmation alert
     Alert.alert(
       "Logout?",
       "Are you sure you want to log out?",
@@ -21,7 +20,7 @@ const Settings: React.FC = () => {
           text: "Yes",
           onPress: () => {
             console.log("Logged out");
-            router.replace("/auth/login"); // Navigate to login page
+            router.replace("/auth/login"); 
           },
         },
       ],

@@ -2,28 +2,23 @@ import * as React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 
-// Define type for the status state
-
 export default function App() {
   const router = useRouter();
+
   return (
-    
-   
-    
+    <View style={styles.container}>
+      <Text style={styles.mainText}>Karibu Fursa </Text>
+      <Text style={styles.subText}>Experience the best features</Text>
+
       <View style={styles.buttons}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.push("/auth/login")}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => router.push("/auth/register")}
         >
-          <Text style={styles.buttonText}>Register</Text>
+          <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
+    </View>
   );
 }
 
@@ -31,50 +26,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-  },
-  video: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    alignItems: "center", 
+    backgroundColor: "#f0f0f0",
   },
   mainText: {
-    color: "white",
-    fontSize: 68,
+    color: "#333",
+    fontSize: 36,
     fontWeight: "bold",
     textAlign: "center",
+    marginBottom: 10,
   },
   subText: {
-    color: "white",
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  tagline: {
-    color: "white",
+    color: "#666",
     fontSize: 18,
-    fontStyle: "italic",
     textAlign: "center",
-    marginTop: 10,
+    marginBottom: 50, 
   },
   buttons: {
-    flexDirection: "row",
-    justifyContent: "space-around",
     alignItems: "center",
-    position: "absolute",
-    bottom: 30,
-    left: 0,
-    right: 0,
   },
   button: {
     backgroundColor: "#6200ea",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 25,
-    elevation: 3, // Adds a shadow effect on Android
+    elevation: 3, 
   },
   buttonText: {
     color: "white",

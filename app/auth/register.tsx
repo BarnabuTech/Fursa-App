@@ -1,8 +1,7 @@
-// app/auth/register.tsx
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { useRouter } from "expo-router";
-import axios from "axios"; // Import axios
+import axios from "axios"; 
 
 const RegisterScreen = () => {
   const router = useRouter();
@@ -12,13 +11,13 @@ const RegisterScreen = () => {
 
   const handleRegister = async () => {
     try {
-      // Make the API request
       const response = await axios.post("http://192.168.93.155:5001/register", {
+
         name: username,
         email,
         password,
       });
-
+  
       if (response.data.status === "ok") {
         Alert.alert("Registration successful", response.data.data);
         router.push("/auth/login");
