@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from "react-native";
 import { useRouter } from "expo-router";
+
+const logoImage = require("../../assets/images/fursa-logo.png");
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -29,6 +31,7 @@ const Login: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <Image source={logoImage} style={styles.logo} />
       <Text style={styles.header}>Login</Text>
       <TextInput
         style={styles.input}
@@ -60,6 +63,13 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
     backgroundColor: "#f5f5f5",
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+    resizeMode: "contain",
+    alignSelf: "center",
   },
   header: {
     fontSize: 32,
