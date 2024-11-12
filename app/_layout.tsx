@@ -20,7 +20,6 @@ export default function RootLayout() {
 
       {/* Other stack screens */}
     
-      <Stack.Screen name="(home)" />
     </Stack>
   );
 }
