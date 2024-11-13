@@ -3,10 +3,15 @@ import { View, Text, TextInput, Button, StyleSheet, Alert, Image } from "react-n
 import { useRouter } from "expo-router";
 import axios from "axios";
 
+import { useTheme } from "../context/ThemeContext"; 
+
+
 const logoImage = require("../../assets/images/fursa-logo.png");
 
 
+
 const RegisterScreen = () => {
+  const { isDarkMode } = useTheme(); 
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -33,31 +38,39 @@ const RegisterScreen = () => {
   };
 
   return (
+
+    <View style={[styles.container, isDarkMode && styles.darkContainer]}>
+      <Text style={[styles.title, isDarkMode && styles.darkText]}>Register</Text>
+
     <View style={styles.container}>
       <Image source={logoImage} style={styles.logo} />
       <Text style={styles.title}>Register</Text>
+
       <TextInput
-        style={styles.input}
+        style={[styles.input, isDarkMode && styles.darkInput]}
         placeholder="Username"
+        placeholderTextColor={isDarkMode ? "#ccc" : "#888"}
         value={username}
         onChangeText={setUsername}
       />
       <TextInput
-        style={styles.input}
+        style={[styles.input, isDarkMode && styles.darkInput]}
         placeholder="Email"
+        placeholderTextColor={isDarkMode ? "#ccc" : "#888"}
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
-        style={styles.input}
+        style={[styles.input, isDarkMode && styles.darkInput]}
         placeholder="Password"
         secureTextEntry
+        placeholderTextColor={isDarkMode ? "#ccc" : "#888"}
         value={password}
         onChangeText={setPassword}
       />
       <Button title="Register" onPress={handleRegister} />
       <Text
-        style={styles.link}
+        style={[styles.link, isDarkMode && styles.darkLink]}
         onPress={() => router.push("/auth/login")}
       >
         Already have an account? Login
@@ -67,6 +80,16 @@ const RegisterScreen = () => {
 };
 
 const styles = StyleSheet.create({
+
+  container: { flex: 1, justifyContent: "center", paddingHorizontal: 20 },
+  darkContainer: { backgroundColor: "#333" },
+  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
+  darkText: { color: "#fff" },
+  input: { borderWidth: 1, borderColor: "#ccc", padding: 10, marginVertical: 10, borderRadius: 5 },
+  darkInput: { backgroundColor: "#444", color: "#fff", borderColor: "#555" },
+  link: { color: "blue", marginTop: 15, textAlign: "center" },
+  darkLink: { color: "#89CFF0" },
+
   container: {
     flex: 1,
     justifyContent: "center",
@@ -98,6 +121,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     textAlign: "center",
   },
+
 });
 
 export default RegisterScreen;

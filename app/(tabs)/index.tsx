@@ -1,37 +1,74 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, Dimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Fontisto from "@expo/vector-icons/Fontisto";
+import { useTheme } from "../context/ThemeContext";
+
+const { width } = Dimensions.get("window"); 
+
+const job1 = require("./assets/images/job1.jpg");
+const job2 = require("./assets/images/job2.jpg");
+const job3 = require("./assets/images/job3.jpg");
 
 const TabHome: React.FC = () => {
+  const { isDarkMode } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Fursa</Text>
-      <Text style={styles.subtitle}>Technologies used:</Text>
-      <View style={styles.techList}>
-        <LinearGradient colors={["#61DBFB", "#35AFC2"]} style={styles.techItem}>
-          <Icon name="code" size={30} color="#fff" />
-          <Text style={styles.techText}>React Native</Text>
-        </LinearGradient>
-        <LinearGradient colors={["#764ABC", "#543B9A"]} style={styles.techItem}>
-          <Fontisto name="redux" size={30} color="#fff" />
-          <Text style={styles.techText}>tribalchief</Text>
-        </LinearGradient>
-        <LinearGradient colors={["#FF4154", "#D12B3A"]} style={styles.techItem}>
-          <Icon name="database" size={30} color="#fff" />
-          <Text style={styles.techText}>tribalchief</Text>
-        </LinearGradient>
-        <LinearGradient colors={["#0FAAFF", "#0B79C1"]} style={styles.techItem}>
-          <Icon name="wpforms" size={30} color="#fff" />
-          <Text style={styles.techText}>tribalchief</Text>
-        </LinearGradient>
-        <LinearGradient colors={["#000000", "#434343"]} style={styles.techItem}>
-          <Icon name="server" size={30} color="#fff" />
-          <Text style={styles.techText}>tribalchief</Text>
-        </LinearGradient>
+    <ScrollView contentContainerStyle={[styles.container, isDarkMode && styles.darkContainer]}>
+      
+      <Text style={[styles.title, isDarkMode && styles.darkTitle]}>Welcome to Fursa</Text>
+
+    
+      <TextInput
+        style={[styles.searchBar, isDarkMode && styles.darkSearchBar]}
+        placeholder="Search jobs..."
+        placeholderTextColor={isDarkMode ? "#aaa" : "#666"}
+      />
+
+      
+      <Text style={[styles.sectionTitle, isDarkMode && styles.darkSectionTitle]}>Featured Opportunities</Text>
+      <ScrollView horizontal pagingEnabled style={styles.carousel}>
+        {[job1, job2, job3].map((image, index) => (
+          <Image key={index} source={image} style={styles.carouselImage} resizeMode="cover" />
+        ))}
+      </ScrollView>
+
+    
+      <Text style={[styles.sectionTitle, isDarkMode && styles.darkSectionTitle]}>Explore Categories</Text>
+      <View style={styles.categoryContainer}>
+        {["Tech", "Sales", "Healthcare", "Education", "Finance"].map((category) => (
+          <TouchableOpacity key={category} style={[styles.categoryItem, isDarkMode && styles.darkCategoryItem]}>
+            <Icon name="briefcase" size={25} color="#fff" />
+            <Text style={styles.categoryText}>{category}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
-    </View>
+
+      
+      <TouchableOpacity style={[styles.mapButton, isDarkMode && styles.darkMapButton]}>
+        <Icon name="map-marker" size={25} color="#fff" />
+        <Text style={styles.mapText}>Find Jobs Near Me</Text>
+      </TouchableOpacity>
+
+      
+      <Text style={[styles.sectionTitle, isDarkMode && styles.darkSectionTitle]}>Success Stories</Text>
+      <Text style={styles.successStory}>“I found my dream job through Fursa! Highly recommend.” - User A</Text>
+
+      
+      <TouchableOpacity style={[styles.profileShortcut, isDarkMode && styles.darkProfileShortcut]}>
+        <Icon name="user" size={25} color="#fff" />
+        <Text style={styles.profileText}>Complete Your Profile</Text>
+      </TouchableOpacity>
+
+      
+      <Text style={[styles.motivationalText, isDarkMode && styles.darkMotivationalText]}>
+        "Unlock opportunities in Mombasa today!"
+      </Text>
+
+      
+      <Text style={[styles.sectionTitle, isDarkMode && styles.darkSectionTitle]}>Announcements</Text>
+      <Text style={styles.announcement}>Upcoming Job Fair: Mombasa, Nov 20th!</Text>
+    </ScrollView>
   );
 };
 
@@ -39,11 +76,14 @@ export default TabHome;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
     backgroundColor: "#f5f5f5",
+  },
+  darkContainer: {
+    backgroundColor: "#121212",
   },
   title: {
     fontSize: 32,
@@ -52,33 +92,131 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#333",
   },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: "bold",
+  darkTitle: {
+    color: "#fff",
+  },
+  searchBar: {
+    width: "90%",
+    padding: 12,
+    borderRadius: 15,
     marginBottom: 20,
-    textAlign: "center",
+    backgroundColor: "#fff",
+    color: "#333",
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  darkSearchBar: {
+    backgroundColor: "#333",
+    color: "#fff",
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,
     color: "#666",
   },
-  techList: {
-    flexDirection: "column",
-    alignItems: "center",
+  darkSectionTitle: {
+    color: "#ccc",
+  },
+  carousel: {
+    height: 250, 
+    width: width * 0.95,
+    marginBottom: 20,
+    borderRadius: 15,
+    overflow: "hidden",
+  },
+  carouselImage: {
+    height: "100%",
+    width: width * 0.95, 
+    borderRadius: 15,
+  },
+  categoryContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginVertical: 15,
     width: "100%",
   },
-  techItem: {
+  categoryItem: {
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: "#61DBFB",
+    marginBottom: 15,
+    width: "47%",
+    elevation: 3,
+  },
+  darkCategoryItem: {
+    backgroundColor: "#555",
+  },
+  categoryText: {
+    color: "#fff",
+    fontSize: 16,
+    marginTop: 5,
+  },
+  mapButton: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    padding: 15,
+    borderRadius: 15,
+    backgroundColor: "#0FAAFF",
+    marginVertical: 20,
     width: "90%",
-    paddingVertical: 15,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    marginBottom: 15,
     elevation: 5,
   },
-  techText: {
-    fontSize: 18,
+  darkMapButton: {
+    backgroundColor: "#333",
+  },
+  mapText: {
     color: "#fff",
+    fontSize: 18,
     marginLeft: 10,
-    fontWeight: "bold",
+  },
+  successStory: {
+    fontSize: 16,
+    color: "#333",
+    marginVertical: 10,
+    textAlign: "center",
+    fontStyle: "italic",
+    lineHeight: 24,
+  },
+  profileShortcut: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 15,
+    borderRadius: 10,
+    backgroundColor: "#61DBFB",
+    width: "90%",
+    marginVertical: 20,
+    elevation: 5,
+  },
+  darkProfileShortcut: {
+    backgroundColor: "#333",
+  },
+  profileText: {
+    color: "#fff",
+    fontSize: 18,
+    marginLeft: 10,
+  },
+  motivationalText: {
+    fontSize: 16,
+    textAlign: "center",
+    marginVertical: 20,
+    color: "#333",
+    fontStyle: "italic",
+  },
+  darkMotivationalText: {
+    color: "#ccc",
+  },
+  announcement: {
+    fontSize: 16,
+    color: "#666",
+    marginVertical: 10,
+    textAlign: "center",
+    lineHeight: 24,
   },
 });
