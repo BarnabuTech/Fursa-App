@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { useTheme } from "../context/ThemeContext";
+<<<<<<< HEAD
+=======
+import axios from "axios";
+import { API_BASE_URL } from '@env';
+>>>>>>> e5d8652 (authentication)
 
 const logoImage = require("../../assets/images/fursa-logo.png");
 
@@ -13,7 +18,11 @@ const Login: React.FC = () => {
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+<<<<<<< HEAD
   const handleLogin = () => {
+=======
+  const handleLogin = async () => {
+>>>>>>> e5d8652 (authentication)
     if (!validateEmail(email)) {
       Alert.alert("Invalid Email", "Please enter a valid email address.");
       return;
@@ -22,9 +31,28 @@ const Login: React.FC = () => {
       Alert.alert("Weak Password", "Password should be at least 6 characters.");
       return;
     }
+<<<<<<< HEAD
     console.log("Logging in with:", email, password);
     router.replace("/(tabs)");
   };
+=======
+  
+    console.log("Sending request with:", email, password); 
+  
+    try {
+      const response = await axios.post(`${API_BASE_URL}/login-user`, {        email,
+        password
+      });
+      console.log('Login successful:', response.data);
+      router.replace("/(tabs)");
+    } catch (error) {
+      console.error('Error during login:', error);
+      Alert.alert('Login failed', 'Please check your credentials.');
+    }
+  };
+  
+  
+>>>>>>> e5d8652 (authentication)
 
   return (
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
