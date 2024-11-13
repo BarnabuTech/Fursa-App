@@ -13,8 +13,23 @@ const Settings: React.FC = () => {
       "Logout?",
       "Are you sure you want to log out?",
       [
+
         { text: "Cancel", onPress: () => console.log("Logout cancelled"), style: "cancel" },
         { text: "Yes", onPress: () => router.replace("/auth/login") },
+
+        {
+          text: "Cancel",
+          onPress: () => console.log("Logout cancelled"),
+          style: "cancel",
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            console.log("Logged out");
+            router.replace("/auth/login"); 
+          },
+        },
+
       ],
       { cancelable: true }
     );

@@ -7,7 +7,7 @@ const jobs = [
   { id: '1', title: 'Software Engineer', company: 'Tech Co.', location: 'Mombasa' },
   { id: '2', title: 'Graphic Designer', company: 'Creative Studio', location: 'Nairobi' },
   { id: '3', title: 'Marketing Intern', company: 'Ad Agency', location: 'Mombasa' },
-  
+
 ];
 
 export default function JobFeedScreen() {

@@ -15,10 +15,9 @@ export default function RootLayout() {
         },
       }}
     >
-      {/* Define a Stack.Screen for the Tabs layout */}
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-      {/* Other stack screens */}
+   
     
     </Stack>
   );

@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, Alert, Image } from "react-native";
 import { useRouter } from "expo-router";
 import axios from "axios";
+
 import { useTheme } from "../context/ThemeContext"; 
+
+
+const logoImage = require("../../assets/images/fursa-logo.png");
+
+
 
 const RegisterScreen = () => {
   const { isDarkMode } = useTheme(); 
@@ -32,8 +38,14 @@ const RegisterScreen = () => {
   };
 
   return (
+
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
       <Text style={[styles.title, isDarkMode && styles.darkText]}>Register</Text>
+
+    <View style={styles.container}>
+      <Image source={logoImage} style={styles.logo} />
+      <Text style={styles.title}>Register</Text>
+
       <TextInput
         style={[styles.input, isDarkMode && styles.darkInput]}
         placeholder="Username"
@@ -68,6 +80,7 @@ const RegisterScreen = () => {
 };
 
 const styles = StyleSheet.create({
+
   container: { flex: 1, justifyContent: "center", paddingHorizontal: 20 },
   darkContainer: { backgroundColor: "#333" },
   title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
@@ -76,6 +89,40 @@ const styles = StyleSheet.create({
   darkInput: { backgroundColor: "#444", color: "#fff", borderColor: "#555" },
   link: { color: "blue", marginTop: 15, textAlign: "center" },
   darkLink: { color: "#89CFF0" },
+
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    alignItems: "center",
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+    resizeMode: "contain",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input: {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+  },
+  link: {
+    color: "blue",
+    marginTop: 15,
+    textAlign: "center",
+  },
+
 });
 
 export default RegisterScreen;
+

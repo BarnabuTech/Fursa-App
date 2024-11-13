@@ -6,7 +6,7 @@ const applications = [
   { id: '1', title: 'Software Engineer', status: 'Interview Scheduled' },
   { id: '2', title: 'Graphic Designer', status: 'Applied' },
   { id: '3', title: 'Marketing Intern', status: 'Offer Received' },
-  
+
 ];
 
 export default function ApplicationTrackerScreen() {
