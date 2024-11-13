@@ -4,9 +4,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemeContext";
 
-const { width } = Dimensions.get("window"); // Get the device's screen width
+const { width } = Dimensions.get("window"); 
 
-// Import images
 const job1 = require("./assets/images/job1.jpg");
 const job2 = require("./assets/images/job2.jpg");
 const job3 = require("./assets/images/job3.jpg");
@@ -124,15 +123,15 @@ const styles = StyleSheet.create({
     color: "#ccc",
   },
   carousel: {
-    height: 250, // Larger height for carousel
-    width: width * 0.95, // Larger width for carousel
+    height: 250, 
+    width: width * 0.95,
     marginBottom: 20,
     borderRadius: 15,
     overflow: "hidden",
   },
   carouselImage: {
     height: "100%",
-    width: width * 0.95, // Matches the width of the carousel container
+    width: width * 0.95, 
     borderRadius: 15,
   },
   categoryContainer: {

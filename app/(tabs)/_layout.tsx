@@ -1,4 +1,3 @@
-// app/_layout.tsx
 import React from "react";
 import { ThemeProvider } from "../context/ThemeContext";
 import { Tabs } from "expo-router";

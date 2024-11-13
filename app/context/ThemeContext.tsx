@@ -1,4 +1,3 @@
-// ThemeContext.tsx
 import React, { createContext, useContext, useState } from "react";
 import { StyleSheet, useColorScheme } from "react-native";
 

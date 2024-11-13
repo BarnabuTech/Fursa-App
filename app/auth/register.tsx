@@ -1,12 +1,11 @@
-// app/auth/register.tsx
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import axios from "axios";
-import { useTheme } from "../context/ThemeContext"; // Import useTheme
+import { useTheme } from "../context/ThemeContext"; 
 
 const RegisterScreen = () => {
-  const { isDarkMode } = useTheme(); // Get the theme state
+  const { isDarkMode } = useTheme(); 
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
