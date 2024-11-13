@@ -8,14 +8,12 @@ const logoImage = require("../assets/images/fursa-logo.png");
 export default function App() {
   const router = useRouter();
 
-  // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(30)).current;
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const buttonScale = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    // Start animations
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -37,7 +35,6 @@ export default function App() {
     ]).start();
   }, []);
 
-  // Button animation
   const handlePressIn = () => {
     Animated.spring(buttonScale, {
       toValue: 0.9,
