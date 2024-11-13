@@ -25,41 +25,41 @@ const Settings: React.FC = () => {
       <Text style={[styles.header, isDarkMode ? styles.darkText : styles.lightText]}>Settings</Text>
       <View style={styles.section}>
         
-        {/* Account Option */}
+        
         <TouchableOpacity style={[styles.option, isDarkMode ? styles.darkOption : styles.lightOption]}>
           <Icon name="user" size={24} color="#4caf50" />
           <Text style={[styles.optionText, isDarkMode ? styles.darkText : styles.lightText]}>Account</Text>
           <Icon name="angle-right" size={24} color="#999" style={styles.optionIcon} />
         </TouchableOpacity>
         
-        {/* Dark Mode Toggle */}
+        
         <TouchableOpacity style={[styles.option, isDarkMode ? styles.darkOption : styles.lightOption]}>
           <Text style={[styles.optionText, isDarkMode ? styles.darkText : styles.lightText]}>Dark Mode</Text>
           <Switch value={isDarkMode} onValueChange={toggleTheme} />
         </TouchableOpacity>
 
-        {/* Notifications Option */}
+      
         <TouchableOpacity style={[styles.option, isDarkMode ? styles.darkOption : styles.lightOption]}>
           <Icon name="bell" size={24} color="#ff9800" />
           <Text style={[styles.optionText, isDarkMode ? styles.darkText : styles.lightText]}>Notifications</Text>
           <Icon name="angle-right" size={24} color="#999" style={styles.optionIcon} />
         </TouchableOpacity>
 
-        {/* Privacy Option */}
+        
         <TouchableOpacity style={[styles.option, isDarkMode ? styles.darkOption : styles.lightOption]}>
           <Icon name="lock" size={24} color="#f44336" />
           <Text style={[styles.optionText, isDarkMode ? styles.darkText : styles.lightText]}>Privacy</Text>
           <Icon name="angle-right" size={24} color="#999" style={styles.optionIcon} />
         </TouchableOpacity>
 
-        {/* About Option */}
+        
         <TouchableOpacity style={[styles.option, isDarkMode ? styles.darkOption : styles.lightOption]}>
           <Icon name="info-circle" size={24} color="#3f51b5" />
           <Text style={[styles.optionText, isDarkMode ? styles.darkText : styles.lightText]}>About</Text>
           <Icon name="angle-right" size={24} color="#999" style={styles.optionIcon} />
         </TouchableOpacity>
 
-        {/* Logout Option */}
+   
         <TouchableOpacity style={[styles.option, isDarkMode ? styles.darkOption : styles.lightOption]} onPress={handleLogout}>
           <Icon name="sign-out" size={24} color="#e91e63" />
           <Text style={[styles.optionText, isDarkMode ? styles.darkText : styles.lightText]}>Logout</Text>
@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
   optionText: { flex: 1, fontSize: 18, marginLeft: 10 },
   optionIcon: { marginLeft: "auto" },
 
-  // Light mode styles
+  
   lightContainer: { backgroundColor: "#f5f5f5" },
   lightText: { color: "#333" },
   lightOption: { backgroundColor: "#fff" },
 
-  // Dark mode styles
+ 
   darkContainer: { backgroundColor: "#121212" },
   darkText: { color: "#fff" },
   darkOption: { backgroundColor: "#333" },

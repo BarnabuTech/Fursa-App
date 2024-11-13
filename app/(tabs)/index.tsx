@@ -15,17 +15,17 @@ const TabHome: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={[styles.container, isDarkMode && styles.darkContainer]}>
-      {/* Welcome Banner */}
+      
       <Text style={[styles.title, isDarkMode && styles.darkTitle]}>Welcome to Fursa</Text>
 
-      {/* Search Bar */}
+    
       <TextInput
         style={[styles.searchBar, isDarkMode && styles.darkSearchBar]}
         placeholder="Search jobs..."
         placeholderTextColor={isDarkMode ? "#aaa" : "#666"}
       />
 
-      {/* Featured Opportunities Carousel */}
+      
       <Text style={[styles.sectionTitle, isDarkMode && styles.darkSectionTitle]}>Featured Opportunities</Text>
       <ScrollView horizontal pagingEnabled style={styles.carousel}>
         {[job1, job2, job3].map((image, index) => (
@@ -33,7 +33,7 @@ const TabHome: React.FC = () => {
         ))}
       </ScrollView>
 
-      {/* Categories Grid */}
+    
       <Text style={[styles.sectionTitle, isDarkMode && styles.darkSectionTitle]}>Explore Categories</Text>
       <View style={styles.categoryContainer}>
         {["Tech", "Sales", "Healthcare", "Education", "Finance"].map((category) => (
@@ -44,28 +44,28 @@ const TabHome: React.FC = () => {
         ))}
       </View>
 
-      {/* Map Section */}
+      
       <TouchableOpacity style={[styles.mapButton, isDarkMode && styles.darkMapButton]}>
         <Icon name="map-marker" size={25} color="#fff" />
         <Text style={styles.mapText}>Find Jobs Near Me</Text>
       </TouchableOpacity>
 
-      {/* Success Stories Section */}
+      
       <Text style={[styles.sectionTitle, isDarkMode && styles.darkSectionTitle]}>Success Stories</Text>
       <Text style={styles.successStory}>“I found my dream job through Fursa! Highly recommend.” - User A</Text>
 
-      {/* Profile Shortcut */}
+      
       <TouchableOpacity style={[styles.profileShortcut, isDarkMode && styles.darkProfileShortcut]}>
         <Icon name="user" size={25} color="#fff" />
         <Text style={styles.profileText}>Complete Your Profile</Text>
       </TouchableOpacity>
 
-      {/* Motivational Quote */}
+      
       <Text style={[styles.motivationalText, isDarkMode && styles.darkMotivationalText]}>
         "Unlock opportunities in Mombasa today!"
       </Text>
 
-      {/* Notifications Section */}
+      
       <Text style={[styles.sectionTitle, isDarkMode && styles.darkSectionTitle]}>Announcements</Text>
       <Text style={styles.announcement}>Upcoming Job Fair: Mombasa, Nov 20th!</Text>
     </ScrollView>
