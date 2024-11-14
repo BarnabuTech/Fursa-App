@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert, Image } from "react-native";
 import { useRouter } from "expo-router";
-<<<<<<< HEAD
 import axios from "axios";
 import { useTheme } from "../context/ThemeContext"; 
 
-=======
-import axios, { AxiosError } from "axios";
-
-import { useTheme } from "../context/ThemeContext"; 
-
-import { API_BASE_URL } from '@env';
-
->>>>>>> e5d8652 (authentication)
 const logoImage = require("../../assets/images/fursa-logo.png");
 
 const RegisterScreen = () => {
@@ -24,7 +15,6 @@ const RegisterScreen = () => {
 
   const handleRegister = async () => {
     try {
-<<<<<<< HEAD
       const response = await axios.post("http://192.168.93.155:5001/register", {
         name: username,
         email,
@@ -42,31 +32,6 @@ const RegisterScreen = () => {
       console.error(error);
     }
   };
-=======
-      const response = await axios.post(`${API_BASE_URL}/register`, {
-         name: username,
-            email,
-            password,
-        });
-
-        if (response.data.status === "ok") {
-            Alert.alert("Registration successful", response.data.data);
-            router.push("/auth/login");
-        } else {
-            Alert.alert("Registration failed", response.data.data);
-        }
-    } catch (error) {
-        const err = error as AxiosError;
-        if (err.response && err.response.status === 400) {
-            Alert.alert("Registration failed", "User already exists!");
-        } else {
-            Alert.alert("An error occurred", "Unable to register");
-            console.error("Error:", err);
-        }
-    }
-};
-
->>>>>>> e5d8652 (authentication)
 
   return (
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
