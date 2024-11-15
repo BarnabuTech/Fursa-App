@@ -16,7 +16,7 @@ const RegisterScreen = () => {
   const handleRegister = async () => {
     try {
            
-        const response = await axios.post("http://************/register", {
+        const response = await axios.post("http://**********/register", {
             name: username,
             email,
             password,
