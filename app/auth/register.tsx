@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert, Image } from "react-native";
 import { useRouter } from "expo-router";
-import axios from "axios";
-import { useTheme } from "../context/ThemeContext"; 
+import axios, { AxiosError } from "axios";
+import { useTheme } from "../context/ThemeContext";
 
 const logoImage = require("../../assets/images/fursa-logo.png");
 
 const RegisterScreen = () => {
-  const { isDarkMode } = useTheme(); 
+  const { isDarkMode } = useTheme();
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -15,21 +15,27 @@ const RegisterScreen = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post("http://192.168.93.155:5001/register", {
-        name: username,
-        email,
-        password,
-      });
+           
+        const response = await axios.post("http://************/register", {
+            name: username,
+            email,
+            password,
+        });
 
-      if (response.data.status === "ok") {
-        Alert.alert("Registration successful", response.data.data);
-        router.push("/auth/login");
-      } else {
-        Alert.alert("Registration failed", response.data.data);
-      }
+        if (response.data.status === "ok") {
+            Alert.alert("Registration successful", response.data.data);
+            router.push("/auth/login");
+        } else {
+            Alert.alert("Registration failed", response.data.data);
+        }
     } catch (error) {
-      Alert.alert("An error occurred", "Unable to register");
-      console.error(error);
+        const err = error as AxiosError;
+        if (err.response && err.response.status === 400) {
+            Alert.alert("Registration failed", "User already exists!");
+        } else {
+            Alert.alert("An error occurred", "Unable to register");
+            console.error("Error:", err);
+        }
     }
   };
 
