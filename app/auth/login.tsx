@@ -5,6 +5,7 @@ import { useTheme } from "../context/ThemeContext";
 import axios, { AxiosError } from "axios";
 
 
+
 const logoImage = require("../../assets/images/fursa-logo.png");
 
 const Login: React.FC = () => {
@@ -17,12 +18,12 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     if (!validateEmail(email)) {
-      Alert.alert("Invalid Email", "Please enter a valid email address.");
-      return;
+        Alert.alert("Invalid Email", "Please enter a valid email address.");
+        return;
     }
     if (password.length < 6) {
-      Alert.alert("Weak Password", "Password should be at least 6 characters.");
-      return;
+        Alert.alert("Weak Password", "Password should be at least 6 characters.");
+        return;
     }
   
     console.log("Sending request with:", email, password);  // Debugging log
