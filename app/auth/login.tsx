@@ -30,7 +30,7 @@ const Login: React.FC = () => {
   
     try {
       // Directly using the IP address in the API URL
-      const response = await axios.post("http://192.168.93.155:5002login-user", {
+      const response = await axios.post("http://********/login-user", {
         email,
         password
       });
