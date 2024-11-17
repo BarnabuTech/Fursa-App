@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useTheme } from "../context/ThemeContext";
-import axios, { AxiosError } from "axios";
-
-
+import axios from "axios";
 
 const logoImage = require("../../assets/images/fursa-logo.png");
 
@@ -18,47 +17,40 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     if (!validateEmail(email)) {
-        Alert.alert("Invalid Email", "Please enter a valid email address.");
-        return;
+      Alert.alert("Invalid Email", "Please enter a valid email address.");
+      return;
     }
-    if (password.length < 6) {
-        Alert.alert("Weak Password", "Password should be at least 6 characters.");
-        return;
-    }
-  
-    console.log("Sending request with:", email, password);  // Debugging log
-  
+
     try {
-      // Directly using the IP address in the API URL
-      const response = await axios.post("http://*****/login-user", {
-        email,
-        password
-      });
-  
-      // Handle backend response
-      if (response.data.message === "User doesn't exist!") {
-        Alert.alert("Login failed", "User does not exist.");
-      } else if (response.data.message === "Invalid credentials") {
-        Alert.alert("Login failed", "Incorrect password.");
+      console.log("Attempting login with:", email, password); 
+      const response = await axios.post("http://*********/login-user", { email, password });
+
+      console.log("Response from server:", response.data); 
+      if (response.data.status === "ok") {
+        await AsyncStorage.setItem("user_token", response.data.data);
+        Alert.alert("Success", "Login successful!");
+        router.replace("/(tabs)/");
       } else {
-        console.log('Login successful:', response.data);
-        // Handle success here (e.g., save token, redirect)
-        router.replace("/(tabs)");
+        Alert.alert("Login Failed", response.data.message || "Unknown error.");
       }
-    } catch (error) {
-      console.error('Error during login:', error);
-  
-      // Handle other errors
-      Alert.alert('Login failed', 'Please check your credentials.');
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error("Backend responded with error:", error.response?.data);
+        Alert.alert("Login Failed", error.response?.data?.message || "Server error.");
+      } else if (error instanceof Error) {
+        console.error("Unexpected error:", error.message);
+        Alert.alert("Error", "An unexpected error occurred. Please try again.");
+      } else {
+        console.error("Unknown error type:", error);
+        Alert.alert("Error", "An unknown error occurred.");
+      }
     }
   };
-  
 
   return (
     <View style={[styles.container, isDarkMode && styles.darkContainer]}>
       <Image source={logoImage} style={styles.logo} />
       <Text style={[styles.header, isDarkMode && styles.darkText]}>Login</Text>
-
       <TextInput
         style={[styles.input, isDarkMode && styles.darkInput]}
         placeholder="Email"

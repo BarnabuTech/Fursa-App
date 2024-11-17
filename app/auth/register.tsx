@@ -14,28 +14,45 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState("");
 
   const handleRegister = async () => {
-    try {
-           
-        const response = await axios.post("http://1******/register", {
-            name: username,
-            email,
-            password,
-        });
+   
+    if (!username || !email || !password) {
+      Alert.alert("Validation Error", "All fields are required.");
+      return;
+    }
 
-        if (response.data.status === "ok") {
-            Alert.alert("Registration successful", response.data.data);
-            router.push("/auth/login");
-        } else {
-            Alert.alert("Registration failed", response.data.data);
-        }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert("Validation Error", "Please enter a valid email address.");
+      return;
+    }
+
+    if (password.length < 6) {
+      Alert.alert("Validation Error", "Password must be at least 6 characters.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://********/register", {
+        name: username,
+        email,
+        password,
+      });
+
+      if (response.data.status === "ok") {
+        Alert.alert("Registration successful", response.data.data);
+        router.push("/auth/login");
+      } else {
+        Alert.alert("Registration failed", response.data.data);
+      }
     } catch (error) {
-        const err = error as AxiosError;
-        if (err.response && err.response.status === 400) {
-            Alert.alert("Registration failed", "User already exists!");
-        } else {
-            Alert.alert("An error occurred", "Unable to register");
-            console.error("Error:", err);
-        }
+      const err = error as AxiosError;
+      if (err.response && err.response.status === 400) {
+        Alert.alert("Registration failed", "User already exists!");
+      } else {
+        Alert.alert("An error occurred", "Unable to register");
+        console.error("Error:", err);
+      }
     }
   };
 

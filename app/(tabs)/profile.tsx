@@ -1,101 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, Alert, ScrollView, KeyboardAvoidingView } from "react-native";
-import { useTheme } from "../context/ThemeContext";
-import * as ImagePicker from 'expo-image-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState } from "react";
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  StyleSheet, 
+  ScrollView, 
+  KeyboardAvoidingView 
+} from "react-native";
 
 export default function ProfileScreen() {
-  const { isDarkMode } = useTheme();
   const [name, setName] = useState("");
   const [skills, setSkills] = useState("");
   const [bio, setBio] = useState("");
-  const [avatarUri, setAvatarUri] = useState("https://via.placeholder.com/100");
 
-  
-  useEffect(() => {
-    const loadProfile = async () => {
-      try {
-        const savedName = await AsyncStorage.getItem('name');
-        const savedSkills = await AsyncStorage.getItem('skills');
-        const savedBio = await AsyncStorage.getItem('bio');
-        const savedAvatarUri = await AsyncStorage.getItem('avatarUri');
-        
-        if (savedName) setName(savedName);
-        if (savedSkills) setSkills(savedSkills);
-        if (savedBio) setBio(savedBio);
-        if (savedAvatarUri) setAvatarUri(savedAvatarUri);
-      } catch (error) {
-        console.log("Error loading profile:", error);
-      }
-    };
-    loadProfile();
-  }, []);
-
-  
-  const pickImage = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permissionResult.granted) {
-      Alert.alert('Permission required', 'Permission to access camera roll is required!');
-      return;
-    }
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-    if (!result.canceled) {
-      setAvatarUri(result.uri);
-    }
-  };
-
-  
-  const saveProfile = async () => {
-    try {
-      await AsyncStorage.setItem('name', name);
-      await AsyncStorage.setItem('skills', skills);
-      await AsyncStorage.setItem('bio', bio);
-      await AsyncStorage.setItem('avatarUri', avatarUri);
-      Alert.alert("Profile saved successfully!");
-    } catch (error) {
-      console.log("Error saving profile:", error);
-    }
+  const saveProfile = () => {
+   
+    alert("Profile saved locally (no backend integration).");
   };
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={[styles.container, isDarkMode && styles.darkContainer]}>
-          <TouchableOpacity style={styles.avatarContainer} onPress={pickImage}>
-            <Image style={styles.avatar} source={{ uri: avatarUri }} />
-            <Text style={styles.avatarText}>Tap to change avatar</Text>
-          </TouchableOpacity>
-
-          <Text style={[styles.header, isDarkMode && styles.darkText]}>Edit Your Profile</Text>
+        <View style={styles.container}>
+          <Text style={styles.header}>Edit Your Profile</Text>
           
-          <Text style={[styles.label, isDarkMode && styles.darkText]}>Name</Text>
+          <Text style={styles.label}>Name</Text>
           <TextInput
-            style={[styles.input, isDarkMode && styles.darkInput]}
+            style={styles.input}
             placeholder="Enter your name"
-            placeholderTextColor={isDarkMode ? "#ccc" : "#888"}
+            placeholderTextColor="#888"
             value={name}
             onChangeText={setName}
           />
 
-          <Text style={[styles.label, isDarkMode && styles.darkText]}>Skills</Text>
+          <Text style={styles.label}>Skills</Text>
           <TextInput
-            style={[styles.input, isDarkMode && styles.darkInput]}
+            style={styles.input}
             placeholder="Enter your skills (e.g., JavaScript, Design)"
-            placeholderTextColor={isDarkMode ? "#ccc" : "#888"}
+            placeholderTextColor="#888"
             value={skills}
             onChangeText={setSkills}
           />
 
-          <Text style={[styles.label, isDarkMode && styles.darkText]}>Bio</Text>
+          <Text style={styles.label}>Bio</Text>
           <TextInput
-            style={[styles.input, styles.bioInput, isDarkMode && styles.darkInput]}
+            style={[styles.input, styles.bioInput]}
             placeholder="Write a short bio"
-            placeholderTextColor={isDarkMode ? "#ccc" : "#888"}
+            placeholderTextColor="#888"
             value={bio}
             onChangeText={setBio}
             multiline
@@ -119,17 +71,11 @@ const styles = StyleSheet.create({
     padding: 20, 
     backgroundColor: "#fff" 
   },
-  darkContainer: { 
-    backgroundColor: "#333" 
-  },
   header: { 
     fontSize: 24, 
     fontWeight: "bold", 
     marginBottom: 20, 
     textAlign: "center" 
-  },
-  darkText: { 
-    color: "#fff" 
   },
   label: { 
     fontSize: 16, 
@@ -144,29 +90,9 @@ const styles = StyleSheet.create({
     marginTop: 5, 
     backgroundColor: "#fff" 
   },
-  darkInput: { 
-    backgroundColor: "#444", 
-    color: "#fff", 
-    borderColor: "#555" 
-  },
   bioInput: { 
     height: 80, 
     textAlignVertical: "top" 
-  },
-  avatarContainer: {
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: "#eee",
-  },
-  avatarText: {
-    fontSize: 12,
-    color: "#888",
-    marginTop: 5,
   },
   saveButton: {
     backgroundColor: "#0A74DA",
@@ -181,6 +107,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-
-

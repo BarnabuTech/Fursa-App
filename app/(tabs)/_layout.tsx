@@ -25,7 +25,7 @@ export default function Layout() {
             ),
           }}
         />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="job-feed"
           options={{
             title: "Jobs",
@@ -33,8 +33,8 @@ export default function Layout() {
               <FontAwesome name="briefcase" size={24} color={color} />
             ),
           }}
-        />
-        <Tabs.Screen
+        /> */}
+        {/* <Tabs.Screen
           name="application-tracker"
           options={{
             title: "Tracker",
@@ -42,8 +42,19 @@ export default function Layout() {
               <FontAwesome name="list" size={24} color={color} />
             ),
           }}
-        />
+        /> */}
+      
         <Tabs.Screen
+          name="opportunity-wheel"
+          options={{
+            title: "Opportunity Wheel",
+            tabBarIcon: ({ color }) => (
+              <FontAwesome name="circle-o-notch" size={24} color={color} />
+            ),
+          }}
+        />
+
+       <Tabs.Screen
           name="profile"
           options={{
             title: "Profile",
@@ -52,6 +63,8 @@ export default function Layout() {
             ),
           }}
         />
+      
+       
       </Tabs>
     </ThemeProvider>
   );
